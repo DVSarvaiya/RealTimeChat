@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App (No Backend)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="loadRooms()">
+    
+    <div id="admin-container">
+        <button id="admin-login-button" onclick="showAdminLogin()">Admin Login</button>
+        <div id="admin-login" style="display: none;">
+            <h2>Admin Login</h2>
+            <input type="password" id="admin-password" placeholder="Admin Password">
+            <button onclick="adminLogin()">Login</button>
+        </div>
+        <button id="admin-logout-button" style="display: none;" onclick="adminLogout()">Logout</button>
+    </div>
+
+    <h2>Create a Room</h2>
+    <input type="text" id="room-title" placeholder="Room Title">
+    <input type="password" id="room-password" placeholder="Room Password">
+    <input type="number" id="room-time" placeholder="Time Limit (minutes)">
+    <button onclick="createRoom()">Create Room</button>
+
+    <h2>Live Rooms</h2>
+    <ul id="rooms-list"></ul>
+
+    <div id="chat-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
