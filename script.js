@@ -1,5 +1,5 @@
 const MAX_ROOMS = 10;
-const ADMIN_PASSWORD = "admin123"; // Example admin password
+const ADMIN_PASSWORD = "123"; // Example admin password
 let isAdmin = false; // Flag to check if admin is logged in
 let currentRoomId = null; // Track the current room ID
 
