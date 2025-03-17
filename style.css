@@ -69,6 +69,18 @@ button:hover {
     width: 80%;
 }
 
+.message {
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    width: fit-content;
+    word-wrap: break-word;
+    max-width: 80%;
+    background-color: #acec9d;
+    text-align: left;
+    margin-right: auto;
+}
+
 #admin-login{
     position: absolute;
     top: 50px;

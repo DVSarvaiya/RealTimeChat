@@ -2,6 +2,7 @@ const MAX_ROOMS = 10;
 const ADMIN_PASSWORD = "123"; // Example admin password
 let isAdmin = false; // Flag to check if admin is logged in
 let currentRoomId = null; // Track the current room ID
+let userScrolled = false; // Flag to check if user has scrolled
 
 async function fetchRooms() {
     const response = await fetch('/rooms');
@@ -101,7 +102,7 @@ async function enterRoom(roomId) {
         chatBox.innerHTML = `
             <h2>${rooms[roomId].title}</h2>
             <button onclick="hideRoom('${roomId}')">Hide</button>
-            <div class="messages" id="messages-${roomId}"></div>
+            <div class="messages" id="messages-${roomId}" onscroll="handleScroll('${roomId}')"></div>
             <input type="text" class="message-input" id="message-${roomId}" placeholder="Type a message" onkeypress="handleKeyPress(event, '${roomId}')">
             <button onclick="sendMessage('${roomId}')">Send</button>
         `;
@@ -123,6 +124,7 @@ async function sendMessage(roomId) {
     displayMessage(roomId, message);
     messageInput.value = "";
     messageInput.focus();
+    scrollToBottom(roomId);
 }
 
 async function loadMessages(roomId) {
@@ -130,13 +132,27 @@ async function loadMessages(roomId) {
     const messagesDiv = document.getElementById(`messages-${roomId}`);
     messagesDiv.innerHTML = "";
     rooms[roomId].messages.forEach(msg => displayMessage(roomId, msg));
+    if (!userScrolled) {
+        scrollToBottom(roomId);
+    }
 }
 
 function displayMessage(roomId, message) {
     const messagesDiv = document.getElementById(`messages-${roomId}`);
     const msgDiv = document.createElement("div");
     msgDiv.textContent = message;
+    msgDiv.classList.add("message");
     messagesDiv.appendChild(msgDiv);
+}
+
+function scrollToBottom(roomId) {
+    const messagesDiv = document.getElementById(`messages-${roomId}`);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function handleScroll(roomId) {
+    const messagesDiv = document.getElementById(`messages-${roomId}`);
+    userScrolled = messagesDiv.scrollTop + messagesDiv.clientHeight < messagesDiv.scrollHeight - 1;
 }
 
 async function deleteRoom(roomId) {
@@ -158,6 +174,7 @@ function showAdminLogin() {
     if(c === 0){
         document.getElementById("admin-login").style.display = "block";
         c = 1;
+        document.getElementById("admin-password").focus();
     }
     else{
         document.getElementById("admin-login").style.display = "none";
@@ -177,6 +194,7 @@ function adminLogin() {
         alert("Incorrect admin password!");
     }
     document.getElementById("admin-password").value = "";
+    document.getElementById("admin-password").focus();
 }
 
 function adminLogout() {
