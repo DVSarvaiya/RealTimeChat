@@ -10,7 +10,7 @@
     
     <div id="admin-container">
         <button id="admin-login-button" onclick="showAdminLogin()">Admin Login</button>
-        <div id="admin-login" style="display: none;">
+        <div id="admin-login">
             <h2>Admin Login</h2>
             <input type="password" id="admin-password" placeholder="Admin Password">
             <button onclick="adminLogin()">Login</button>
@@ -18,11 +18,13 @@
         <button id="admin-logout-button" style="display: none;" onclick="adminLogout()">Logout</button>
     </div>
 
-    <h2>Create a Room</h2>
-    <input type="text" id="room-title" placeholder="Room Title">
-    <input type="password" id="room-password" placeholder="Room Password">
-    <input type="number" id="room-time" placeholder="Time Limit (minutes)">
-    <button onclick="createRoom()">Create Room</button>
+    <div class="form-container" style="text-align: center; align-items: center;">
+        <h2>Create a Room</h2><br>
+        <input type="text" id="room-title" placeholder="Room Title">
+        <input type="password" id="room-password" placeholder="Room Password">
+        <input type="number" id="room-time" placeholder="Time Limit (minutes)">
+        <button onclick="createRoom()" >Create Room</button>
+    </div>
 
     <h2>Live Rooms</h2>
     <ul id="rooms-list"></ul>
